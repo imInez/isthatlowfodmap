@@ -1,0 +1,49 @@
+{% extends 'main_columns.html' %}
+
+{% load analyzer_extras %}
+{% load cards_extras %}
+
+
+{% block row %}
+<div class="col"></div>
+<div class="col text-center"><h2> {{ user.username|capfirst }} </h2>
+    You collected  {{ collected }} meals and saved {{ saved }} meals.
+    <a href="{% url 'users:profile_edit' %}" class="d-block pt-5">Edit your profile</a>
+    <a href="{% url 'users:password_change' %}" class="d-block">Change password</a>
+</div>
+<div class="col">
+</div>
+{% endblock row %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="p-3 mt-3 text-center font-spectral"> Here is your meals collection </h2>
+    <div class="row" id="meals-list">
+        {% include 'users/user_list_ajax.html' %}
+    </div>
+
+</div>
+{% endblock content %}
+
+
+{% block domready %}
+var page = 1;
+var empty_page = false;
+var block_request = false;
+$(window).scroll(function() {
+    var margin = $(document).height() - $(window).height() - 200;
+    if ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
+        block_request = true;
+        page += 1;
+        $.get('?page=' + page, function(data) {
+            if(data == '') {
+                empty_page = true;
+            } else {
+                block_request = false;
+                $('#meals-list').append(data);
+            }
+        });
+    }
+});
+{% endblock %}

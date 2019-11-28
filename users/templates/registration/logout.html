@@ -1,0 +1,10 @@
+{% block content %}
+
+    <div class="content-section">
+        <h2> You have succesfully logged out</h2>
+        <div class="form-group border-top pt-3">
+            <a href="{% url 'users:login' %}">Log in again</a>
+        </div>
+    </div>
+
+{% endblock content%}

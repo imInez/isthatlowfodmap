@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load analyzer_extras %}
+{% load cards_extras %}
+{% load crispy_forms_tags %}
+
+{% block row %}
+
+{% endblock row %}
+
+{% block content %}
+<div class="text-center">
+<h2 class="pt-5 font-spectral">{% if query != None %} meals with <i> {{ query }} {% else %} search for meals {% endif %} </i> </h2>
+<a href="{% url 'search:search' %}">New search</a>
+    </div>
+<hr>
+
+
+{% if query %}
+<div class="container">
+    <div class="row">
+        {% for meal in results %}
+        {{ meal.name }}
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 pb-3 pt-3 text-center hover-dark">
+            <a href="{{ meal.get_absolute_url }}">
+                <img src="{{ meal.image_file.url }}"
+                     class="img-thumb" alt="{{ meal.meal_name|capfirst }}" id="meal_image_url"> </a>
+            <p class="mt-3">{% include 'cards/meal/meal_safety.html' with safety=meal.safety %} </p>
+            <a href="{{ meal.get_absolute_url }}"><p id="meal_name">{{ meal.meal_name }} </p></a>
+        </div>
+
+{% empty %}
+There are no results
+{% endfor %}
+    </div>
+</div>
+
+{% else %}
+<div class="container text-center">
+<form action="." method="post" class="d-inline">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <input type="submit" value="Search" class="btn btn-dark">
+</form>
+</div>
+{% endif %}
+{% endblock content %}
+

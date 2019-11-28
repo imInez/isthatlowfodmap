@@ -1,0 +1,77 @@
+{% extends 'main_columns.html' %}
+{% load static %}
+{% load cards_extras %}
+{% load crispy_forms_tags %}
+
+{% block row %}
+
+<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5  minh-60 p-2 ">
+
+    {% if meal_images is not None %}
+    <p> Choose an image for your meal </p>
+    <div id="images">
+        {% for img in meal_images %}
+        <img src='{{ img|cut_imgsrc }}' class="chosen image_small" data-action="unselected" />
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+<div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 p-5 minh-60 bg-greybeige">
+
+    <h1>Save a meal</h1>
+    <form action="{% url 'cards:meal_create' %}" method="post" name="create_meal" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form.non_field_errors }}
+
+        {% for hidden_field in form_hidden_fields %}
+        {{ hidden_field.errors }}
+        {{ hidden_field|as_crispy_field }}
+        {{ hidden_field.help_text }}
+        {% endfor %}
+
+        {% for field in form %}
+        {{ field.errors }}
+        {% if field.name == 'image_url' %}
+        <span id="image_url"> {{ field|as_crispy_field }} </span>
+        {% else %}
+        {{ field|as_crispy_field }}
+        {% endif %}
+        {{ field.help_text }}
+        {% endfor %}
+
+
+
+        {% include 'analyzer/results_table.html' with ingredients=ingr_table results=res_table %}
+
+
+        <div class="text-center pt-2"><input type="submit" value="Save it" class="btn btn-dark"></div>
+    </form>
+    <br><br>
+</div>
+
+{% endblock row %}
+
+{% block domready %}
+
+jQuery('#images .chosen').click(function(e){
+<!--find selected image -->
+selected_image = jQuery(this).attr('src');
+<!--assign url of selected image to form field -->
+$('#image_url input').val(selected_image);
+<!--    select and unselect-->
+if ($(this).data('action') == 'unselected') {
+$(this).css({border: "3px solid black"})
+$(this).data('action', 'selected')
+} else {
+$(this).css({border: "0px solid red"})
+$(this).data('action', 'unselected')
+}
+
+});
+
+{% endblock domready %}
+
+

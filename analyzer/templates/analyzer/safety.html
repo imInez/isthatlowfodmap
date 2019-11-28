@@ -1,0 +1,13 @@
+{% load static %}
+{% load analyzer_extras %}
+
+{{ safety_colors }}
+  <h5>Meal safety:
+         {% for colour in safety%}
+         {{ colour }}
+         {% for key, value in colour.items %}
+         {{ key || {{ value }}
+         {% for i in value|make_range %}
+         <span class="bg-{{ key }} d-inline p-0 m-0" >&nbsp;&nbsp;&nbsp;</span>
+         {% endfor %}{% endfor %}{% endfor %} </h5>
+       <h5>Meal safety: {% for colour in safety%}{% for key, value in colour.items %}{% for i in value|make_range %}<span class="bg-{{ key }} d-inline p-0 m-0" >&nbsp;&nbsp;&nbsp;</span>{% endfor %}{% endfor %}{% endfor %} </h5>

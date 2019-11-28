@@ -1,0 +1,17 @@
+{% extends 'main_columns.html' %}
+{% load crispy_forms_tags %}
+{% block row %}
+<div class=" container w-25 text-center">
+    <h1 class="font-spectral"> Login </h1>
+<form action='{% url "users:login" %}' method="post">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <p><input type="submit" class="btn btn-dark d-inline" value="Log in"></p>
+</form>
+
+</div>
+{% endblock row %}
+
+
+
+

@@ -1,0 +1,3 @@
+{% load cards_extras %}
+{% load analyzer_extras %}
+{% for colour in safety|eval %}{% for key, value in colour.items %}{% for i in value|make_range %}<span class="bg-{{ key }} d-inline p-0 m-0" >&nbsp;&nbsp;&nbsp;</span>{% endfor %}{% endfor %}{% endfor %}

@@ -1,0 +1,69 @@
+{% extends 'main_columns.html' %}
+{% load static %}
+{% load analyzer_extras %}
+{% block row %}
+
+
+<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 order-2 order-sm-2 order-md-1 minh-60 center_content ">
+    <img src='{% if meal.image_url %}{{ meal.image_url }}{% else %}{{ meal.image_file.url }}{% endif %}'
+         class="fr oh mxh-800">
+</div>
+
+<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 order-1 order-sm-1 order-md-2 minh-60 bg-greybeige">
+    <div class="right-box align-items-start p-5 ">
+        <h2 class="d-inline">{{ meal.meal_name|capfirst }} </h2>
+        {% with collectors=meal.collectors.all  %}
+        {% if request.user.is_authenticated %}
+        {% if is_author %}
+        <a href="{% url 'cards:meal_edit' meal.pk %}" > Edit </a>
+        {% else %}
+
+        <a href="#" data-id="{{ meal.pk }}" data-action="{% if request.user in collectors %}remove{% else %}add{% endif %}" class="collect btn btn-dark mb-3">
+            {% if request.user in collectors %}
+            Remove from my collection
+            {% else %}
+            Add to my collection
+            {% endif %}
+        </a>
+        <p> This meal is in <span class="collectors_count"> {{ collectors.count }} </span> collection{{ collectors.count|pluralize }} </p>
+
+        {% endif %}
+
+        {% else %}
+        <a href="{% url 'users:login' %}?next=/meals/details/{{meal.pk}}/"><p class="d-inline mb-3"> Log in to save this meal </p></a>
+        {% endif %}
+        {% endwith %}
+
+        {% if meal.meal_url %}
+        <a href="{{meal.meal_url}}" class="d-block pt-2"> Check the recipe </a>
+        {% endif %}
+
+
+
+        <hr>
+        {% include 'analyzer/results_table.html' with ingredients=ingredients results=results %}
+    </div>
+</div>
+{% endblock row %}
+
+
+{% block domready %}
+$('a.collect').click(function(e){
+    e.preventDefault();
+    $.post('{% url "cards:collect" %}', {
+        'id': $(this).data('id'),
+        'action': $(this).data('action')
+    },
+    function(data){
+        if (data['status'] == 'ok'){
+            var action_was = $('a.collect').data('action')
+            $('a.collect').data('action', action_was == 'add' ? 'remove' : 'add');
+            $('a.collect').text(action_was == 'add' ? 'Remove from my collection' : 'Add to my collection');
+            var collectors_was = parseInt($('span.collectors_count').text());
+            $('span.collectors_count').text(action_was == 'add' ? collectors_was+1 : collectors_was-1);
+            }
+    }
+    );
+    });
+
+{% endblock %}

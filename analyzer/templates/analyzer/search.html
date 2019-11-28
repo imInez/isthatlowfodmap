@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+{% if query %}
+    <p> Meals containing: {{ query ]}</p>
+    {% with results_count as total_results %}
+        Found {{ total_results }} meal{{ total_results|pluralize }}
+    {% endwith %}
+
+<div class="container">
+    <div class="row">
+    {% for meal in results %}
+        {{ meal.name }}
+    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 pb-3 pt-3 text-center hover-dark">
+        <a href="{{ meal.get_absolute_url }}">
+            <img src="{{ meal.image_file.url }}"
+                 class="img-thumb" alt="{{ meal.meal_name|capfirst }}" id="meal_image_url"> </a>
+        <p class="mt-3">{% include 'cards/meal/meal_safety.html' with safety=meal.safety %} </p>
+        <a href="{{ meal.get_absolute_url }}"><p id="meal_name">{{ meal.meal_name }} </p></a>
+    </div>
+    </div>
+    </div>
+    {% empty %}
+    There are no results
+    {% endfor %}
+
+{% else %}
+
+    <p> Search meals </p>
+    <form action="." method="get">
+        {{ form|crispy }}
+        <input type="submit" value="Search">
+    </form>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% load analyzer_extras %}
+
+{% if meal.safety %}
+<h5 class="mt-3">Meal safety: {% include 'cards/meal/meal_safety.html' with safety=meal.safety %} </h5>
+{% else %}
+<h5 class="mt-3">Meal safety: {% include 'cards/meal/meal_safety.html' %} </h5>
+{% endif %}
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Ingredient</th>
+        <th scope="col">Max amount</th>
+        <th scope="col">Comment</th>
+        <th scope="col">Substitute</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for ingr in ingredients %}
+    {% for res, amount, comment, safety, substitute in results %}
+    {% if ingr == res %}
+    <tr>
+        <th scope="row" class="bg-{{safety}}"></th>
+        <td>{{ ingr }} </td>
+        <td>{{ amount }} </td>
+        <td>{% if safety == 'blue' %} change to {% else %} {{ comment }} {% endif %} </td>
+        <td>{% if substitute is not None %} {{ substitute }} {% endif %}  </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="row whitespace no-gutters">
+    <div class="col bg-green text-center pl-1 pr-1">safe</div>
+    <div class="col bg-yellow text-center pl-2 pr-2">be careful with the amount</div>
+    <div class="col bg-orange text-center pl-2 pr-2"> very little amount is ok</div>
+    <div class="col bg-red text-center pl-1 pr-1">not safe</div>
+    <div class="col bg-blue text-center pl-2 pr-2">choose a substitute instead</div>
+    <div class="col bg-grey text-center pl-1 pr-1">could not find this</div>
+</div>
