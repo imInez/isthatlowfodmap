@@ -633,7 +633,7 @@ rice milk (max. 250 ml), yellow
 Hemp milk (max. 300 ml), yellow
 coconut water (100 g), orange""",
 """FRUITS
-pienapple
+pineapple
 lemon
 Kiw
 clementine
