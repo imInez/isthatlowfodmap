@@ -56,8 +56,8 @@ class Scraper:
     def find_ingredients_keyword_tag(self, page_obj):
         # search for tag where ingredients word is
         ingr = page_obj.find_all(['h2', 'h3', 'h4', 'h5', 'span', 'p', 'strong', 'div'],
-                                 text=re.compile('Składniki|Składniki:|SKŁADNIKI|SKŁADNIKI:|składniki:|'
-                                                 'INGREDIENTS|Ingredients|ingredients:|INGREDIENTS:'))
+                                 text=re.compile('Składniki|Składniki:|SKŁADNIKI|SKŁADNIKI:|składniki:|składniki'
+                                                 'INGREDIENTS|Ingredients|ingredients:|INGREDIENTS:|ingredients'))
         # print('\n'*5, "INGR KEYWORDS: ", ingr)
         if len(ingr) == 0:
             return None
