@@ -151,7 +151,7 @@ LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'analyzer:analyze'
 LOGOUT_REDIRECT_URL = 'analyzer:analyze'
 
-django_heroku.settings(locals())
+
 
 
 
@@ -169,3 +169,6 @@ DEFAULT_FILE_STORAGE= 'storages.backends.s3boto3.S3Boto3Storage'
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+
+
+django_heroku.settings(locals())
