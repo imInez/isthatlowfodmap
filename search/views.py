@@ -13,7 +13,7 @@ def search(request, ingredients_correction=None, meal_url_correction=None):
     print("MEALS SEARCH")
     if request.method == 'POST':
         if 'query' in request.POST:
-            print('QUERY: ', query)
+            print('QUERY: ', request.POST.get('query'))
             form = SearchForm(request.POST)
             if form.is_valid():
                 query = form.cleaned_data['query']

@@ -48,8 +48,10 @@ class IngredientsChecker():
         tokens = [re.sub("[,\[\]().|/:\-\'\"]?", '', t).lower() for t in text.split()]
         tokens = [t for t in tokens]
         if language == 'PL':
-            endings = ['ków', 'nych', 'ego', 'iej', 'iem', 'ków', 'nej', 'owa', 'owe', 'owy', 'sia', 'wej', 'ych', 'ca', 'cy', 'ej', 'ek', 'ia', 'ie', 'ii',
-                       'ka', 'kę', 'ki', 'ko', 'ku', 'na', 'ne', 'no', 'ny', 'ów', 'wa', 'a', 'e', 'i', 'o', 'u', 'y', 'ę', 'ń', 'ś']
+            endings = ['ków', 'nych', 'ego', 'iej', 'iem', 'ków', 'nej', 'owa', 'owe', 'owy', 'sia', 'wej', 'ych',
+                       'ca', 'cy', 'ej', 'ek', 'ia', 'ie', 'ii', 'ka', 'kę', 'ki', 'ko', 'ku', 'na', 'ne', 'no', 'ny',
+                       'ów', 'wa',
+                       'a', 'e', 'i', 'o', 'u', 'y', 'ę', 'ń', 'ś']
         else:
             endings = ['ies', 'es', 's', 'y']
         for idx, token in enumerate(tokens):
@@ -126,8 +128,6 @@ class IngredientsChecker():
         not_found = [ingr.strip() for ingr in real_ingredients if ingr.strip() not in [ingr[0] for ingr in results] and len(ingr)>1]
         for ingr in not_found:
             results.append((ingr, '', 'not found', 'grey', ''))
-        # for ingr in not_found:
-            # results_dict[ingr] = ''
         return list(dict.fromkeys(results)), list(dict.fromkeys(not_found))
 
     def ingr_check(self, ingr):
