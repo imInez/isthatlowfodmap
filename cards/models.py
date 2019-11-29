@@ -65,7 +65,8 @@ class Meal(models.Model):
     def save(self, *args, **kwargs):
         if self.image_url:
             self.get_image_from_url()
-            self.resize_image()
+            # self.resize_image()
+            # make aws lambda function
         self.upload_safety()
         super(Meal, self).save(*args, **kwargs)
 

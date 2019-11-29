@@ -81,7 +81,7 @@ def analyze(request, ingredients_correction=None, meal_url_correction=None, lang
                    'ingredients_save': ingredients_save, 'results_save': results_save,
                    'meals': meals, 'safety': results_data.get('safety', None),
                    'tokens': results_data.get('stems', None),
-                   'search_form': search_form})
+                   'search_form': search_form })
 
 
 def meals_search(request):

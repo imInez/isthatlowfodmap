@@ -31,6 +31,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = os.environ.get('SECRET_KEY_FODMAP')
 SECRET_KEY = '127d18e727a6213524f9b93a5666e2b7692a457a9694a325'
 #
+print('KEY: ', os.environ.get('SECRET_KEY_FODMAP'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -54,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +152,20 @@ LOGIN_REDIRECT_URL = 'analyzer:analyze'
 LOGOUT_REDIRECT_URL = 'analyzer:analyze'
 
 django_heroku.settings(locals())
+
+
+
+AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID_FODMAP')
+AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY_FODMAP')
+AWS_STORAGE_BUCKET_NAME=os.environ.get('AWS_STORAGE_BUCKET_NAME_FODMAP')
+print('AWS_ACCESS_KEY_ID_FODMAP', AWS_ACCESS_KEY_ID,
+'AWS_SECRET_ACCESS_KEY_FODMAP', AWS_SECRET_ACCESS_KEY,
+'AWS_STORAGE_BUCKET_NAME_FODMAP', AWS_STORAGE_BUCKET_NAME)
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+
+DEFAULT_FILE_STORAGE= 'storages.backends.s3boto3.S3Boto3Storage'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
