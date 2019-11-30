@@ -23,15 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '7%o4gaejukn$!(zwo#tkji1bhs_6*+!n$3!)1n_-w0t_rhzbb-'
-    # '127d18e727a6213524f9b93a5666e2b7692a457a9694a325'
 
-# for item in os.environ.items():
-#     print('SECRET: ', item )
-# print('DB: ', os.environ.get('DB_USER_FODMAP'))
 SECRET_KEY = os.environ.get('SECRET_KEY_FODMAP')
-# SECRET_KEY = '127d18e727a6213524f9b93a5666e2b7692a457a9694a325'
-#
-print('KEY: ', os.environ.get('SECRET_KEY_FODMAP'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
