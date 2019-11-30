@@ -152,22 +152,19 @@ LOGIN_REDIRECT_URL = 'analyzer:analyze'
 LOGOUT_REDIRECT_URL = 'analyzer:analyze'
 
 
-
-
-
 AWS_ACCESS_KEY_ID=os.environ.get('AWS_ACCESS_KEY_ID_FODMAP')
 AWS_SECRET_ACCESS_KEY=os.environ.get('AWS_SECRET_ACCESS_KEY_FODMAP')
 AWS_STORAGE_BUCKET_NAME=os.environ.get('AWS_STORAGE_BUCKET_NAME_FODMAP')
-print('AWS_ACCESS_KEY_ID_FODMAP', AWS_ACCESS_KEY_ID,
-'AWS_SECRET_ACCESS_KEY_FODMAP', AWS_SECRET_ACCESS_KEY,
-'AWS_STORAGE_BUCKET_NAME_FODMAP', AWS_STORAGE_BUCKET_NAME)
+
 
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
-DEFAULT_FILE_STORAGE= 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
+DEFAULT_FILE_STORAGE = 'fodmap_website.storage_backends.MediaStorage'
+#
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATIC_URL = 'http://' + AWS_STORAGE_BUCKET_NAME + '.s3.amazonaws.com/'
 
 django_heroku.settings(locals())
