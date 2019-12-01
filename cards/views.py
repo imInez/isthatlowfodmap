@@ -47,10 +47,10 @@ def meal_create(request):
             form.fields['tokens'].initial = tokens
             if meal_images != 'None' and meal_images is not None:
                 meal_images = parse.unquote(meal_images).split()
-                form.fields['image_file'].widget = forms.HiddenInput()
-                form.fields['image_url'].widget = forms.HiddenInput()
+                # form.fields['image_file'].widget = forms.HiddenInput()
+                # form.fields['image_url'].widget = forms.HiddenInput()
             else:
-                form.fields['image_url'].widget = forms.HiddenInput()
+                # form.fields['image_url'].widget = forms.HiddenInput()
                 meal_images = None
             if request.POST.get('save') == 'True':
                 form = MealCreateForm(request.POST, request.FILES)
