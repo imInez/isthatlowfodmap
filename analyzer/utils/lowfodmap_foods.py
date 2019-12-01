@@ -686,6 +686,9 @@ Spelt flour, sifted
 Potato flour
 buckwheat flour
 oat flour (< 60 g)
+gluten-free flour 
+gluten free flour 
+glutenfree flour 
 Tapioca starch
 corn starch
 potato starch
@@ -717,7 +720,7 @@ bun, red
 roll, red
 Whole grain wheat bread sourdough
 Whole grain wheat bread, sourdough
-Spelled sourdough bread, <3 slices, yellow
+sourdough spelt bread, <3 slices, yellow
 white bread (2 slices), sourdough, yellow
 corn tortilla (< 6 tortillas), yellow
 Sprouted wheat (max. 50 g), orange""",
@@ -975,6 +978,7 @@ Dried tomato (2 pieces), orange
 Pesto (10 g), orange
 Bouillon cube (max. 2 g), orange""",
 """SUBSTITUTES
+flour, gluten free, blue
 pasta, gluten free, blue
 bread, gluten free, blue
 roll, gluten free, blue

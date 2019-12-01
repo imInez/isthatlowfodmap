@@ -10,9 +10,6 @@ from cards.models import Meal
 from django.contrib.postgres.search import SearchVector
 
 
-
-
-
 def slug(text, make_slug):
     if make_slug is True:
         return text.replace(' ', '-')
@@ -23,18 +20,20 @@ def slug(text, make_slug):
 def get_website_data(link_form):
         scraper = Scraper()
         meal = scraper.parse(link_form['link'].value())
-        meal_name = str(meal.name).replace(',', '').replace('/\n', '').replace("'", '').strip()
+        meal_name = slug(str(meal.name).replace(',', '').replace('/\n', '').replace("'", '').strip(), True)
         meal_url = parse.quote(meal.url, safe='')
-        meal_images = [parse.quote(img, safe='') for img in meal.images]
+        meal_images = slug(str([parse.quote(img, safe='') for img in meal.images]), True)
+
         return {'meal': meal, 'meal_name': meal_name, 'meal_url': meal_url, 'meal_images': meal_images}
 
 
 def get_results(ingredients, language):
     checker = IngredientsChecker(ingredients)
     results, not_found, ingredients, stems = checker.check_ingredients(language)
+    stems = slug(str(stems), True)
     print('INGR: ', ingredients)
     print('RES: ', results)
-    safety = calculate_safety(results)
+    safety = slug(str(calculate_safety(results)), True)
     return {'results': results, 'not_found': not_found, 'ingredients': ingredients, 'stems': stems, 'safety': safety}
 
 
@@ -44,12 +43,11 @@ def analyze(request, ingredients_correction=None, meal_url_correction=None, lang
     meal_data = dict()
     results_data = dict()
     ingredients_save, results_save= None, None
+    language = request.POST.get('language') if not language or request.POST.get('language') != language else language
     if request.method == 'POST':
         language_form = LanguageForm(request.POST)
         ingr_form = IngredientsForm(request.POST)
         link_form = LinkForm(request.POST)
-        if not language: language = request.POST.get('language')
-        print('POST: ', language)
         if ingr_form.data['ingredients']:
             if ingr_form.is_valid():
                 if link_form.data['link']:
@@ -70,6 +68,7 @@ def analyze(request, ingredients_correction=None, meal_url_correction=None, lang
             ingr_form.fields['ingredients'].initial = parse.unquote(slug(ingredients_correction, False))
             if meal_url_correction and meal_url_correction != "None":
                 link_form.fields['link'].initial = parse.unquote(meal_url_correction)
+            language_form.fields['language'].initial = language
     return render(request, 'analyzer/analyze.html',
                   {'language_form': language_form, 'ingr_form': ingr_form, 'link_form': link_form, 'language': language,
                    #this is for results table

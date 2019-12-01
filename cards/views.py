@@ -34,7 +34,68 @@ def slug(text, make_slug):
 
 
 @login_required
-def meal_create(request, meal_url=None, meal_name=None, ingredients=None, meal_images=None, results=None, safety=None, tokens=None):
+def meal_create(request):
+    print('POST: ', request.POST)
+    # create the unquoted ingr and results to display results table
+    meal_url = request.POST.get('meal_url')
+    meal_name = slug(request.POST.get('meal_name'), False)
+    ingredients = request.POST.get('ingredients')
+    meal_images = slug(request.POST.get('meal_images'), False) if request.POST.get('meal_images') else None
+    results = request.POST.get('results')
+    safety = slug(request.POST.get('safety'), False)
+    tokens = slug(request.POST.get('tokens'), False)
+    ingr_table = None
+    res_table = None
+    data = [meal_url, meal_name, ingredients, meal_images, results]
+    try:
+        ingr_table = parse.unquote(slug(ingredients, False)).split('\n')
+        res_table = ast.literal_eval(parse.unquote(slug(results, False)))
+    except AttributeError:
+        pass
+
+    if request.method == 'POST':
+        # try:
+        #     ingr_table = parse.unquote(slug(ingredients, False))\
+        #         # .split('\n')
+        #     print('PO: ', ingr_table)
+        #     res_table = ast.literal_eval(parse.unquote(slug(results, False)))
+        # except AttributeError:
+        #     pass
+        if any(item is not None for item in data):
+            form = MealCreateForm()
+            if meal_name != 'None':
+                form.fields['meal_name'].initial = str(meal_name).replace(',', '').replace('\\n', '').replace("'",'').strip()
+            if meal_url != 'None':
+                form.fields['meal_url'].initial = parse.unquote(meal_url)
+            form.fields['ingredients'].initial = ingr_table
+            form.fields['results'].initial = res_table
+            form.fields['safety'].initial = safety
+            form.fields['tokens'].initial = tokens
+            if meal_images != 'None' and meal_images is not None:
+                print('MEAL IMAGES: ', meal_images)
+                meal_images = parse.unquote(meal_images).split()
+                # form.fields['image_file'].widget = forms.HiddenInput()
+                # form.fields['image_url'].widget = forms.HiddenInput()
+            else:
+                # form.fields['image_url'].widget = forms.HiddenInput()
+                meal_images = None
+            if request.POST.get('save') == 'True':
+                form = MealCreateForm(request.POST, request.FILES)
+        else:
+            form = MealCreateForm(request.POST, request.FILES)
+        if form.is_valid():
+            cd = form.cleaned_data
+            new_meal = form.save(commit=False)
+            new_meal.author = request.user
+            new_meal.save()
+            new_meal.collectors.add(request.user)
+            return redirect(new_meal.get_absolute_url())
+    else:
+        form = MealCreateForm()
+    return render(request, 'cards/meal/create.html', {'form': form, 'meal_images': meal_images, 'ingr_table': ingr_table, 'res_table': res_table, 'safety': safety})
+
+@login_required
+def meal_create2(request, meal_url=None, meal_name=None, ingredients=None, meal_images=None, results=None, safety=None, tokens=None):
     # create the unquoted ingr and results to display results table
     ingr_table = None
     res_table = None

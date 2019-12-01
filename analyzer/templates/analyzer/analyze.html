@@ -18,11 +18,26 @@
         <h3> Your results </h3>
         {% include "analyzer/results_table.html" %}
         <p class="pt-3">Should the results be unsatisfying, try to <a href="{% url 'analyzer:analyze' ingredients_save meal_url language %}">
-            correct the ingredients</a> and check them again.</p>
+            correct the ingredients or change language</a> and check them again.</p>
         <div class="pt-3">
+<!--                        <form class="d-inline" name="save_meal" method="post"-->
+<!--                              action=" url 'cards:meal_create' meal_name=meal_name meal_url=meal_url ingredients=ingredients_save results=results_save meal_images=meal_images safety=safety tokens=tokens %}">-->
+<!--                             {% csrf_token %}-->
+<!--                            <input type="hidden" name="supporttype" />-->
+<!--                            <input type="submit" value="SAVE THIS MEAL" class="btn btn-dark d-inline"/>-->
+<!--                        </form>-->
             <form class="d-inline" name="save_meal" method="post"
-                  action="{% url 'cards:meal_create' meal_name=meal_name meal_url=meal_url ingredients=ingredients_save results=results_save meal_images=meal_images safety=safety tokens=tokens %}">
-                {% csrf_token %}
+                  action="{% url 'cards:meal_create'%}">
+                 {% csrf_token %}
+                <input  name="meal_name" value= {{meal_name}}>
+                <input  name="meal_url" value={{meal_url}}>
+                <input  name="ingredients" value={{ingredients_save}} >
+                <input  name="results" value={{results_save}}>
+                <input  name="meal_images" value={{meal_images}}>
+                {% with safety as s %}
+                <input  name="safety" value={{s}}>
+                {% endwith %}
+                <input name="tokens" value={{tokens}}>
                 <input type="hidden" name="supporttype" />
                 <input type="submit" value="SAVE THIS MEAL" class="btn btn-dark d-inline"/>
             </form>
@@ -41,9 +56,9 @@
 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 p-5 order-1 order-sm-1 order-md-2 minh-60 bg-greybeige no-">
     <h5 class="text-center"> Check whether your meal is low fodmap safe </h5>
     <form action='#' method="post">
-        <div id="language">{{ language_form|crispy }}</div>
         {{ ingr_form|crispy }}
         {{ link_form|crispy }}
+        <div id="language">{{ language_form|crispy }}</div>
         {% csrf_token %}
         <input type="submit" value="Check it!" class="btn btn-dark">
     </form>
