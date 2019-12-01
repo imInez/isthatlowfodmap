@@ -26,7 +26,7 @@ def get_website_data(link_form):
         meal_name = slug(str(meal.name).replace(',', '').replace('/\n', '').replace("'", '').strip(), True)
         meal_url = parse.quote(meal.url, safe='')
         meal_images = slug(str([parse.quote(img, safe='') for img in meal.images]), True) if len(meal.images) > 1 \
-            else parse.quote(meal.images, safe='')
+            else parse.quote(str(meal.images), safe='')
         return {'meal': meal, 'meal_name': meal_name, 'meal_url': meal_url, 'meal_images': meal_images}
 
 
