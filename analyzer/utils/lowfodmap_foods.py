@@ -555,6 +555,7 @@ dactyl, red
 blackberr, red
 currant, red
 raisin, red
+sultana, red
 in syrup, red
 Dried Beans, red
 pea, red
