@@ -26,7 +26,13 @@ def meal_create(request):
     meal_url = request.POST.get('meal_url')
     meal_name = slug(request.POST.get('meal_name'), False)
     ingredients = request.POST.get('ingredients')
-    meal_images = slug(request.POST.get('meal_images'), False) if request.POST.get('meal_images') else None
+    if request.POST.get('meal_images'):
+        if len(parse.unquote(request.POST.get('meal_images')).split())>1:
+            meal_images = slug(request.POST.get('meal_images'), False)
+        else:
+            meal_images = request.POST.get('meal_images')
+    else:
+        meal_images = None
     results = request.POST.get('results')
     safety = slug(request.POST.get('safety'), False)
     tokens = slug(request.POST.get('tokens'), False)
