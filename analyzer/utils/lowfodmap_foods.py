@@ -943,7 +943,8 @@ goat cheese, red""",
                  basil
                  marjoram""",
                  """OTHER
-                 broth, depending on composition, orange
+                 coleslaw, depending on ingredients, orange
+                 broth, depending on ingredients, orange
                  root spice
                  spice to the breast
                  baking soda
@@ -953,6 +954,7 @@ goat cheese, red""",
                  Apple vinegar
                  Rice vinegar
                  Malt vinegar
+                 cider vinegar
                  Balsamic vinegar (<21 g), yellow
                  Oct Balsamic (<21 g), yellow
                  Agar agar
