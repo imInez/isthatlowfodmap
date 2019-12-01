@@ -5,6 +5,7 @@ from django.shortcuts import render
 
 from cards.models import Meal
 from search.forms import SearchForm
+from universal.slug import slug
 
 from .forms import IngredientsForm, LanguageForm, LinkForm
 from .utils.ingredients_checker import IngredientsChecker
@@ -13,11 +14,6 @@ from .utils.scraper import Scraper
 from .utils.stemmer import stemm
 
 
-def slug(text, make_slug):
-    if make_slug is True:
-        return text.replace(' ', '-')
-    else:
-        return text.replace('-', ' ')
 
 
 def get_website_data(link_form):
