@@ -36,7 +36,7 @@ class IngredientsChecker():
 
     def stemm(self, text, language):
         # cut the endings to get to the base form of a word
-        tokens = [re.sub("[,\[\]().|/:\-\'\"]?", '', t).lower() for t in text.split()]
+        tokens = [re.sub("[,\[\]().|/:\'\"]?", '', t).lower() for t in text.split()]
         tokens = [t for t in tokens]
         if language == 'PL':
             endings = ['ków', 'nych', 'ego', 'iej', 'iem', 'ków', 'nej', 'owa', 'owe', 'owy', 'sia', 'wej', 'ych',
@@ -112,6 +112,7 @@ class IngredientsChecker():
         results = []
         real_ingredients = [ingr.lower() for ingr in ingredients.split('\n')]
         for ingr in real_ingredients:
+            print('REAL INGR: ', ingr)
             ingr_found = False
             for key in analyzed_ngrams:
                 if ingr_found is False:

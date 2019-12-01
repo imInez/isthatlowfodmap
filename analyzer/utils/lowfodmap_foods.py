@@ -476,6 +476,7 @@ ser kozi, red""",
                 orega
                 bazyl""",
                 """INNE
+                low fodmap
                 bulion, zależnie od składu, orange
                 przypraw korzen
                 przypraw d pierni
@@ -688,10 +689,11 @@ goat cheese, red""",
                  Potato flour
                  buckwheat flour
                  oat flour (< 60 g)
-                 gluten-free flour 
-                 gluten free flour 
-                 gluten free 
-                 glutenfree flour 
+                 gluten-free flour
+                 gluten free flour
+                 glutenfree flour
+                 gluten free
+                 low fodmap
                  Tapioca starch
                  corn starch
                  potato starch
