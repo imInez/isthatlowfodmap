@@ -34,7 +34,9 @@ def get_results(ingredients, language):
     results, not_found, ingredients, stems = checker.check_ingredients(language)
     stems = slug(str(stems), True)
     safety = slug(str(calculate_safety(results)), True)
-    return {'results': results, 'not_found': not_found, 'ingredients': ingredients, 'stems': stems, 'safety': safety}
+    safety_table = calculate_safety(results)
+    return {'results': results, 'not_found': not_found, 'ingredients': ingredients, 'stems': stems, 'safety': safety,
+            'safety_table': safety_table}
 
 
 def analyze(request, ingredients_correction=None, meal_url_correction=None, language=None):
@@ -74,6 +76,7 @@ def analyze(request, ingredients_correction=None, meal_url_correction=None, lang
                    #this is for results table
                    'ingredients': results_data.get('ingredients', None),
                    'results': results_data.get('results', None), 'not_found': results_data.get('not_found', None),
+                   'safety_table': results_data.get('safety_table', None),
                    # this is for saving form
                    'meal_name': meal_data.get('meal_name', None), 'meal_url': meal_data.get('meal_url', None),
                    'meal_images': meal_data.get('meal_images', None),

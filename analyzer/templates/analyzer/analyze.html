@@ -16,7 +16,7 @@
     <div class="align-items-start">
         <br><br>
         <h3> Your results </h3>
-        {% include "analyzer/results_table.html" %}
+        {% include "analyzer/results_table.html"  with safety=safety_table %}
         <p class="pt-3">Should the results be unsatisfying, try to <a href="{% url 'analyzer:analyze' ingredients_save meal_url language %}">
             correct the ingredients or change language</a> and check them again.</p>
         <div class="pt-3">
@@ -98,7 +98,6 @@ current_start = 3
 current_end = 6
 $(window).scroll(function() {
     if($(window).scrollTop() == $(document).height() - $(window).height()) {
-        console.log('start: ', current_start, ' end: ', current_end)
         $.ajax({
             url: 'meals/meals_list/',
             type: 'get',
