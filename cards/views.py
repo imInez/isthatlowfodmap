@@ -116,9 +116,10 @@ def collect(request):
 def edit(request, pk):
     this_meal = Meal.objects.filter(pk=pk).first()
     if request.method == 'POST':
-        form = MealCreateForm(instance=this_meal, data=request.POST)
+        form = MealCreateForm(instance=this_meal, data=request.POST, files=request.FILES)
         if form.is_valid():
             cd = form.cleaned_data
+            print('CD: ', cd)
             form.save()
             return redirect(this_meal.get_absolute_url())
     else:

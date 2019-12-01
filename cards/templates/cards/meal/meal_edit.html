@@ -37,13 +37,13 @@
             {{ field.help_text }}
 
 <!--            hide real ingredients, img_file and img_url field-->
-            {{ form.ingredients|add_class:'wh-0' }}
+            {{ form.ingredients|add_class:'d-none' }}
             {{ field.errors }}
-            {{ form.results|add_class:'wh-0' }}
+            {{ form.results|add_class:'d-none' }}
             {{ field.help_text }}
 
             {{ field.errors }}
-            {{ form.safety|add_class:'wh-0' }}
+            {{ form.safety|add_class:'d-none' }}
             {{ field.help_text }}
             <br>
 
@@ -56,7 +56,7 @@
 
 
             {{ field.errors }}
-            {{ form.image_url|add_class:'wh-0' }}
+            {{ form.image_url|add_class:'d-none' }}
             {{ field.help_text }}<br>
 
 
