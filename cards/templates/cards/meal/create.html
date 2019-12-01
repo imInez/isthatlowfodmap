@@ -9,6 +9,7 @@
 
     {% if meal_images is not None %}
     <p> Choose an image for your meal </p>
+    {{ meal_images }}
     <div id="images">
         {% for img in meal_images %}
         <img src='{{ img|cut_imgsrc }}' class="chosen image_small" data-action="unselected" />

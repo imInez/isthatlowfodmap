@@ -177,13 +177,10 @@ class Scraper:
                 return ingredients
 
     def find_images(self, page_obj):
-        images_all = [img['src'] for img in page_obj.find_all('img') if img.has_attr('src')and
+        images = [img['src'] for img in page_obj.find_all('img') if img.has_attr('src')and
                       img['src'].lower().startswith(('http', 'www.', '//')) and (
                         img['src'].lower().endswith(('.png', '.jpg', '.jpeg')) or
-                        'jpg?' in img['src'])]
-        images = []
-        # TODO this is taking too long
-        images = images_all
+                        '.jpg?' in img['src'])]
         return images
 
     def parse(self, url):
