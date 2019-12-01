@@ -690,6 +690,7 @@ goat cheese, red""",
                  oat flour (< 60 g)
                  gluten-free flour 
                  gluten free flour 
+                 gluten free 
                  glutenfree flour 
                  Tapioca starch
                  corn starch

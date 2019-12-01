@@ -58,6 +58,7 @@ class IngredientsChecker():
                             self.token_pairs[token[:-len(ending)]].append(tokens[idx])
                         tokens[idx] = token[:-len(ending)]
                         changed = True
+        print('TOKENS: ', tokens)
         return tokens
 
     def get_ngrams(self, stems_list, n):
@@ -72,14 +73,18 @@ class IngredientsChecker():
     def translate(self, stem):
         # translate stems back to original form
         key_list = stem.split()
+        print('KEY LIST: ', key_list)
         for idx, word in enumerate(key_list):
+            print('WORD: ', word)
             if word in self.token_pairs:
+                print('word in token pairs')
                 key_list[idx] = self.token_pairs[word][0]
                 if len(self.token_pairs[word]) > 1:
                     self.token_pairs[word].remove(self.token_pairs[word][0])
                 else:
                     self.token_pairs.pop(word)
         new_key = ' '.join(key_list).strip()
+        print('NEW KEY: ', new_key)
         return new_key
 
     def analyze(self, stems_list, lfm):
@@ -93,6 +98,7 @@ class IngredientsChecker():
                     new_key = self.translate(stem)
                     analyzed_stems[new_key] = lfm[stem]
                     analyzed_stems[new_key]['substitute'] = self.get_substitute(stem)
+        print('ANALYZED: ', analyzed_stems)
         return analyzed_stems
 
     def get_substitute(self, stem):
