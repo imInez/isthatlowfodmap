@@ -476,6 +476,7 @@ ser kozi, red""",
                 orega
                 bazyl""",
                 """INNE
+                bezglutenow
                 low fodmap
                 bulion, zależnie od składu, orange
                 przypraw korzen
@@ -693,6 +694,8 @@ goat cheese, red""",
                  gluten free flour
                  glutenfree flour
                  gluten free
+                 gluten-free
+                 glutenfree
                  low fodmap
                  Tapioca starch
                  corn starch
