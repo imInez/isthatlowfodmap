@@ -1,19 +1,21 @@
+import os
+from io import StringIO
+from tempfile import NamedTemporaryFile
+from urllib import request
+from urllib.request import Request, urlopen
+
+import requests
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.core.files import File
+from django.core.files.base import ContentFile
+from django.core.files.images import ImageFile
 from django.db import models
 from django.urls import reverse
-from urllib import request
-from django.core.files import File
-from django.core.files.images import ImageFile
-import os
-from urllib.request import urlopen, Request
-from tempfile import NamedTemporaryFile
 from PIL import Image
-from django.core.files.base import ContentFile
-from PIL import Image
-from io import StringIO
-import requests
+
 from analyzer.utils.safety import calculate_safety
+
 
 def get_admin_user():
     return get_user_model().objects.get_or_create(username='inez')
@@ -69,4 +71,3 @@ class Meal(models.Model):
             # make aws lambda function
         self.upload_safety()
         super(Meal, self).save(*args, **kwargs)
-

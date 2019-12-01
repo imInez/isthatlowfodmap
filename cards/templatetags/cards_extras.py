@@ -1,9 +1,9 @@
-from django import template
 import ast
 import re
+
+from django import template
+
 from ..models import Meal
-
-
 
 register = template.Library()
 @register.filter

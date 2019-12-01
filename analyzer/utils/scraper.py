@@ -1,7 +1,8 @@
+import json
 import re
+
 import requests
 from bs4 import BeautifulSoup
-import json
 
 
 class Meal:
@@ -193,4 +194,3 @@ class Scraper:
             images = self.find_images(soup)
             meal = Meal(url, name, str(ingredients).strip(), images)
             return meal
-

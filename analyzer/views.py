@@ -1,13 +1,16 @@
-from django.shortcuts import render
-from .forms import IngredientsForm, LinkForm, LanguageForm
-from search.forms import SearchForm
-from .utils.ingredients_checker import IngredientsChecker
-from .utils.scraper import Scraper
-from .utils.safety import calculate_safety
-from .utils.stemmer import stemm
 from urllib import parse
-from cards.models import Meal
+
 from django.contrib.postgres.search import SearchVector
+from django.shortcuts import render
+
+from cards.models import Meal
+from search.forms import SearchForm
+
+from .forms import IngredientsForm, LanguageForm, LinkForm
+from .utils.ingredients_checker import IngredientsChecker
+from .utils.safety import calculate_safety
+from .utils.scraper import Scraper
+from .utils.stemmer import stemm
 
 
 def slug(text, make_slug):
@@ -93,7 +96,3 @@ def meals_search(request):
             for word in token:
                 results = results | Meal.objects.annotate(search=SearchVector('meal_name', 'ingredients', 'tokens'),).filter(search=word)
     return render(request, 'analyzer/search.html', {'form': form, 'query': query, 'results': results})
-
-
-
-

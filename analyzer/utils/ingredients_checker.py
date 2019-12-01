@@ -1,7 +1,7 @@
 """ Ingredients checker """
 import json
-import re
 import os
+import re
 import unicodedata
 
 
@@ -144,7 +144,3 @@ class IngredientsChecker():
         results, not_found = self.get_results(analyzed_ngrams, self.ingredients)
         ingredients_table = list(dict.fromkeys([i.strip().lower() for i in self.ingredients.splitlines() ]))
         return results, not_found, ingredients_table, stems
-
-
-
-

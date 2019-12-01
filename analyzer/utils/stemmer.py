@@ -1,6 +1,5 @@
-import re
 import ast
-
+import re
 
 token_pairs = {}
 def stemm(text):

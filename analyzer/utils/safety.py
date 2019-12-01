@@ -1,6 +1,6 @@
-from collections import Counter
 import ast
 import math
+from collections import Counter
 
 
 def calculate_safety(results):

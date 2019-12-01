@@ -1,5 +1,6 @@
 from django import forms
 
+
 class LanguageForm(forms.Form):
     CHOICES = [('ENG', 'English'), ('PL', 'Polski')]
     language = forms.ChoiceField(choices=CHOICES,  required=True, label='Select language: ')
@@ -9,5 +10,3 @@ class IngredientsForm(forms.Form):
 
 class LinkForm(forms.Form):
     link = forms.URLField(label='or link to the recipe: ', required=False)
-
-

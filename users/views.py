@@ -1,13 +1,15 @@
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.views import PasswordChangeView
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
-from .forms import LoginForm, UserRegistrationForm, UserEditForm
-from .models import Profile
-from cards.models import Meal
-from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordChangeView
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
+
+from cards.models import Meal
+
+from .forms import LoginForm, UserEditForm, UserRegistrationForm
+from .models import Profile
 
 
 def user_register(request):
@@ -95,10 +97,3 @@ def profile_edit(request):
 class PasswordChange(PasswordChangeView):
     success_url = '/users/profile'
     template_name = 'users/password_change.html'
-
-
-
-
-
-
-

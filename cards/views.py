@@ -1,14 +1,17 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import MealCreateForm
-from urllib import parse
-from django import forms
 import ast
+from urllib import parse
+
+from django import forms
 from django.contrib.auth.decorators import login_required
-from .models import Meal
-from django.http import JsonResponse
 from django.core import serializers
-from universal.decorators import ajax_required
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
+
+from universal.decorators import ajax_required
+
+from .forms import MealCreateForm
+from .models import Meal
 
 
 def slug(text, make_slug):

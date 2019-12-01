@@ -1,4 +1,5 @@
 import json
+
 base_dict = {"type": "", "amount": "", "comment": "", "safety": ""}
 
 food_list_PL = ["""ZAKAZANE

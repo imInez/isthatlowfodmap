@@ -1,6 +1,8 @@
-from django import forms
-from .models import Meal
 import ast
+
+from django import forms
+
+from .models import Meal
 
 
 class MealCreateForm(forms.ModelForm):
