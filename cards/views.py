@@ -15,13 +15,6 @@ from .forms import MealCreateForm
 from .models import Meal
 
 
-def slug(text, make_slug):
-    if make_slug is True:
-        return text.replace(' ', '-')
-    else:
-        return text.replace('-', ' ')
-
-
 @login_required
 def meal_create(request):
     meal_url = request.POST.get('meal_url')
