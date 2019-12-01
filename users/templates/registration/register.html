@@ -3,11 +3,11 @@
 {% block row %}
 <div class=" container w-25 text-center">
     <h1 class="font-spectral"> Join us </h1>
-<form action='{% url "users:register" %}' method="post">
-    {{ form|crispy }}
-    {% csrf_token %}
-    <p><input type="submit" class="btn btn-dark d-inline" value="Register"></p>
-</form>
+    <form action='{% url "users:register" %}' method="post">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <p><input type="submit" class="btn btn-dark d-inline" value="Register"></p>
+    </form>
 
 </div>
 {% endblock row %}

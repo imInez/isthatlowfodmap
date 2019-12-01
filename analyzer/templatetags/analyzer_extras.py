@@ -25,12 +25,3 @@ def eval(value):
         return value
     except ValueError:
         return value
-
-
-
-#not working
-# @register.inclusion_tag('analyzer/safety.html')
-# def safety_rate(safety_colors):
-#     return safety_colors
-
-

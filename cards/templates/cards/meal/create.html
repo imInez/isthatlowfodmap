@@ -20,8 +20,8 @@
 <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 p-5 minh-60 bg-greybeige">
 
     <h1>Save a meal</h1>
-        <form action="{% url 'cards:meal_create' %}" method="post" name="create_meal" enctype="multipart/form-data">
-<!--    <form action="." method="post" name="create_meal" enctype="multipart/form-data">-->
+    <form action="{% url 'cards:meal_create' %}" method="post" name="create_meal" enctype="multipart/form-data">
+        <!--    <form action="." method="post" name="create_meal" enctype="multipart/form-data">-->
         {% csrf_token %}
 
         {{ form.non_field_errors }}
@@ -42,9 +42,8 @@
         {{ field.help_text }}
         {% endfor %}
 
-            <input name="save" value="True">
+        <input name="save" value="True" type="hidden">
         {% include 'analyzer/results_table.html' with ingredients=ingr_table results=res_table %}
-
         <div class="text-center pt-2"><input type="submit" value="Save it" class="btn btn-dark"></div>
     </form>
     <br><br>
@@ -64,7 +63,7 @@ if ($(this).data('action') == 'unselected') {
 $(this).css({border: "3px solid black"})
 $(this).data('action', 'selected')
 } else {
-$(this).css({border: "0px solid red"})
+$(this).css({border: "0px solid black"})
 $(this).data('action', 'unselected')
 }
 

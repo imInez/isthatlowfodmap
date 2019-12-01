@@ -1,17 +1,14 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import PasswordChangeView
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect, render_to_response
+from django.shortcuts import render, redirect
 from .forms import LoginForm, UserRegistrationForm, UserEditForm
-from django.contrib.auth.models import User
 from .models import Profile
 from cards.models import Meal
 from django.contrib.auth.decorators import login_required
-from django.conf import settings
-from django.views.generic.list import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
-from django.template.context import RequestContext
+
 
 def user_register(request):
     if request.method == 'POST':
@@ -65,7 +62,7 @@ def user_meals(request):
 def profile(request):
     meals = Meal.objects.filter(collectors=request.user)
     saved = Meal.objects.filter(author=request.user).count()
-    collected = Meal.objects.filter(collectors=request.user).count()
+    collected = Meal.objects.filter(collectors=request.user).count()-saved
     paginator = Paginator(meals, 3)
     page = request.GET.get('page')
     try:
@@ -86,8 +83,8 @@ def profile_edit(request):
     if request.method == 'POST':
         user_form = UserEditForm(instance=request.user, data=request.POST)
         if user_form.is_valid():
-                user_form.save()
-                return redirect('/users/profile')
+            user_form.save()
+            return redirect('/users/profile')
         else:
             messages.error(request, "Your profile could not be updated")
     else:

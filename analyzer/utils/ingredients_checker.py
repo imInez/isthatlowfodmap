@@ -5,32 +5,23 @@ import os
 import unicodedata
 
 
-#TODO use nltk?
 class IngredientsChecker():
     def __init__(self, ingredients):
         self.lfm = {}
-        # had + '\n' here
         self.ingredients = ingredients
         self.token_pairs = {}
         self.results = []
         self.not_found = []
 
     def prepare_ingredients(self):
-        # print('PREPARING INGREDIENTS')
         if isinstance(self.ingredients, str):
-            print('GOT STR')
             self.ingredients = re.sub(r'{(.*)}', '', self.ingredients, flags=re.DOTALL)
             self.ingredients = re.sub(r'\(.*?\)', '', self.ingredients, flags=re.DOTALL)
             self.ingredients = ''.join([unicodedata.normalize("NFKC", word) for word in self.ingredients])
-            print('INGREDIENTS str: ', self.ingredients, type(self.ingredients))
-            # self.ingredients = re.sub(r'[0-9]+ */*[0-9]*', '', self.ingredients, flags=re.DOTALL)
         if isinstance(self.ingredients, list):
-            print('GOT LIST')
             self.ingredients = re.sub(r'{(.*)}', '', '\n'.join(self.ingredients)+'\n', flags=re.DOTALL)
             self.ingredients = re.sub(r'\(.*?\)', '', self.ingredients, flags=re.DOTALL)
             self.ingredients = ''.join([unicodedata.normalize("NFKC", word) for word in self.ingredients])
-            # self.ingredients = re.sub(r'[0-9]+ */*[0-9]*g*', '', self.ingredients, flags=re.DOTALL)
-            print('INGREDIENTS list: ', self.ingredients, type(self.ingredients))
 
     def get_lowfodmap(self, language):
         # get list of low and high fodmap foods
@@ -67,7 +58,6 @@ class IngredientsChecker():
                             self.token_pairs[token[:-len(ending)]].append(tokens[idx])
                         tokens[idx] = token[:-len(ending)]
                         changed = True
-        print("TOKENS: ", tokens)
         return tokens
 
     def get_ngrams(self, stems_list, n):
@@ -118,14 +108,14 @@ class IngredientsChecker():
         for ingr in real_ingredients:
             ingr_found = False
             for key in analyzed_ngrams:
-                # print('KEY: ', key)
                 if ingr_found is False:
                     if key in ingr:
-                        # print('INGR: ', ingr)
                         ingr_found = True
                         results.append((ingr.strip(), analyzed_ngrams[key]['amount'],
-                                        analyzed_ngrams[key]['comment'], analyzed_ngrams[key]['safety'], analyzed_ngrams[key]['substitute']))
-        not_found = [ingr.strip() for ingr in real_ingredients if ingr.strip() not in [ingr[0] for ingr in results] and len(ingr)>1]
+                                        analyzed_ngrams[key]['comment'], analyzed_ngrams[key]['safety'],
+                                        analyzed_ngrams[key]['substitute']))
+        not_found = [ingr.strip() for ingr in real_ingredients
+                     if ingr.strip() not in [ingr[0] for ingr in results] and len(ingr)>1]
         for ingr in not_found:
             results.append((ingr, '', 'not found', 'grey', ''))
         return list(dict.fromkeys(results)), list(dict.fromkeys(not_found))
@@ -138,57 +128,23 @@ class IngredientsChecker():
                        'składniki', 'kalkulator jednostek', 'wybierz składnik', 'starty', 'świeży',
                        'glass', 'tablespoon', 'teaspoon', 'tbsp', 'tbsp.', 'tsp', 'tsp.',
                        ]
-        print("INGR: ", ingr, type(ingr))
-        return True if ingr not in ommit_words and len(ingr) > 2 and len(ingr.split()) < 8 and re.search('[a-zA-Z]', ingr) else False
+        return True if ingr not in ommit_words and len(ingr) > 2 and \
+                       len(ingr.split()) < 8 and re.search('[a-zA-Z]', ingr) else False
 
     def check_ingredients(self, language):
-        print('INGREDIENTS: ', self.ingredients)
         self.prepare_ingredients()
-        print('INGREDIENTS: ', self.ingredients)
         self.lfm = self.get_lowfodmap(language)
         self.split_commas()
         stems = self.stemm(self.ingredients, language)
-        print('STEMS: ', stems)
         ngrams = []
         ngrams.append(self.get_ngrams(stems, 3))
         ngrams.append(self.get_ngrams(stems, 2))
         ngrams.append(stems)
-        print('NGRAMS: ', ngrams)
         analyzed_ngrams = self.analyze(ngrams, self.lfm)
-        print('ANALYZED: ', analyzed_ngrams)
         results, not_found = self.get_results(analyzed_ngrams, self.ingredients)
-        print("RESUlTS: ", results)
-        # print("NOT FOUND: ", not_found)
-        # TODO is this table necessary
         ingredients_table = list(dict.fromkeys([i.strip().lower() for i in self.ingredients.splitlines() ]))
-        print('INGR TABLE: ', ingredients_table)
         return results, not_found, ingredients_table, stems
 
 
-# text = """500 g mielonej wołowiny,500 ml passaty pomidorowej (lub 2 puszki krojonych pomidorów),200 ml wody,1 puszka czerwonej fasoli,1 puszka kukurydzy (lub 2 kolby ugotowanej kukurydzy),1 cebula,1 duża szczypta: chili, pieprzu cayenne, słodkiej papryki, ostrej papryki, oregano, kminu rzymskiego,2 czerwone papryki,2 łyżki oliwy,3 ząbki czosnku,oliwa z oliwek,sól, pieprz
-# """
-# text = """
-# 1	Szklanka
-# LUBELLA MLEKOŁAKI MIODO KÓŁKA
-#
-# 4	Szklanki
-# RUKOLA
-# 2	Sztuki
-# GRUSZKA
-# 100	Gramów
-# SER PLEŚNIOWY
-# 2	Łyżki
-# OLIWA
-# 1	Łyżka
-# MIÓD
-# 0.5	Łyżeczki
-# SOK Z CYTRYNY
-# 1	Szczypta
-# SÓL, PIEPRZ"""
-# ic = IngredientsChecker(text)
-# results, not_found, ingredients = ic.check_ingredients()
-#
-# print('results: ', results)
-# print('not found:' , not_found)
 
 

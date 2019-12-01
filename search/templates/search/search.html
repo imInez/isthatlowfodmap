@@ -10,9 +10,9 @@
 
 {% block content %}
 <div class="text-center">
-<h2 class="pt-5 font-spectral">{% if query != None %} meals with <i> {{ query }} {% else %} search for meals {% endif %} </i> </h2>
-<a href="{% url 'search:search' %}">New search</a>
-    </div>
+    <h2 class="pt-5 font-spectral">{% if query != None %} meals with <i> {{ query }} {% else %} search for meals {% endif %} </i> </h2>
+    <a href="{% url 'search:search' %}">New search</a>
+</div>
 <hr>
 
 
@@ -29,19 +29,19 @@
             <a href="{{ meal.get_absolute_url }}"><p id="meal_name">{{ meal.meal_name }} </p></a>
         </div>
 
-{% empty %}
-There are no results
-{% endfor %}
+        {% empty %}
+        There are no results
+        {% endfor %}
     </div>
 </div>
 
 {% else %}
 <div class="container text-center">
-<form action="." method="post" class="d-inline">
-    {{ form|crispy }}
-    {% csrf_token %}
-    <input type="submit" value="Search" class="btn btn-dark">
-</form>
+    <form action="." method="post" class="d-inline">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <input type="submit" value="Search" class="btn btn-dark">
+    </form>
 </div>
 {% endif %}
 {% endblock content %}

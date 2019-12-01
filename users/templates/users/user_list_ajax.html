@@ -1,11 +1,11 @@
 {% load analyzer_extras %}
 {% load cards_extras %}
-    {% for meal in meals %}
-    <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 pb-3 pt-3 text-center hover-dark">
-      <a href="{{ meal.get_absolute_url }} ">
+{% for meal in meals %}
+<div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 pb-3 pt-3 text-center hover-dark">
+    <a href="{{ meal.get_absolute_url }} ">
         <img src="{{ meal.image_file.url }}"
              class="img-thumb" alt="{{ meal.meal_name|capfirst }}">
         <p class="mt-3">{% for colour in meal.safety|evaluate_list %}{% for key, value in colour.items %}{% for i in value|make_range %}<span class="bg-{{ key }} d-inline p-0 m-0" >&nbsp;&nbsp;&nbsp;</span>{% endfor %}{% endfor %}{% endfor %} </p>
         <p class=""> {{ meal.meal_name|lower|capfirst|linebreaks }} </p></a>
-    </div>
-    {% endfor %}
+</div>
+{% endfor %}

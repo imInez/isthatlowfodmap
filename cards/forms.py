@@ -10,12 +10,12 @@ class MealCreateForm(forms.ModelForm):
         model = Meal
         fields = ['meal_name', 'safety', 'meal_url', 'image_file',  'ingredients',  'image_url', 'results', 'tokens' ]
         widgets = {
-            # 'results': forms.TextInput(attrs={'class': 'd-none'}),
-            #        'ingredients': forms.TextInput(attrs={'class': 'd-none'}),
-            #        'safety': forms.TextInput(attrs={'class': 'd-none'}),
-            #        'tokens': forms.TextInput(attrs={'class': 'd-none'}),
-                   'image_file': forms.FileInput}
-        # labels = {'results': '', 'ingredients': '', 'safety': '', 'tokens': ''}
+            'results': forms.TextInput(attrs={'class': 'd-none'}),
+            'ingredients': forms.TextInput(attrs={'class': 'd-none'}),
+            'safety': forms.TextInput(attrs={'class': 'd-none'}),
+            'tokens': forms.TextInput(attrs={'class': 'd-none'}),
+            'image_file': forms.FileInput}
+        labels = {'results': '', 'ingredients': '', 'safety': '', 'tokens': ''}
 
     def clean_ingredients(self):
         cd = self.cleaned_data

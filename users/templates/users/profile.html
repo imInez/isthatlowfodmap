@@ -7,14 +7,13 @@
 {% block row %}
 <div class="col"></div>
 <div class="col text-center"><h2> {{ user.username|capfirst }} </h2>
-    You collected  {{ collected }} meals and saved {{ saved }} meals.
+    You collected  {{ collected }} meal{{ collected|pluralize }} and saved {{ saved }} meal{{ saved|pluralize }}.
     <a href="{% url 'users:profile_edit' %}" class="d-block pt-5">Edit your profile</a>
     <a href="{% url 'users:password_change' %}" class="d-block">Change password</a>
 </div>
 <div class="col">
 </div>
 {% endblock row %}
-
 {% block content %}
 
 <div class="container">

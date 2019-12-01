@@ -23,7 +23,6 @@ def get_website_data(link_form):
         meal_name = slug(str(meal.name).replace(',', '').replace('/\n', '').replace("'", '').strip(), True)
         meal_url = parse.quote(meal.url, safe='')
         meal_images = slug(str([parse.quote(img, safe='') for img in meal.images]), True)
-
         return {'meal': meal, 'meal_name': meal_name, 'meal_url': meal_url, 'meal_images': meal_images}
 
 
@@ -31,8 +30,6 @@ def get_results(ingredients, language):
     checker = IngredientsChecker(ingredients)
     results, not_found, ingredients, stems = checker.check_ingredients(language)
     stems = slug(str(stems), True)
-    print('INGR: ', ingredients)
-    print('RES: ', results)
     safety = slug(str(calculate_safety(results)), True)
     return {'results': results, 'not_found': not_found, 'ingredients': ingredients, 'stems': stems, 'safety': safety}
 
@@ -87,14 +84,11 @@ def meals_search(request):
     form = SearchForm()
     query = None
     results = []
-    print("MEALS SEARCH")
     if 'query' in request.GET:
-        print('QUERY: ', query)
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
             token = stemm(query)
-            print('TOKEN: ', token, type(token))
             results = Meal.objects.annotate(search=SearchVector('meal_name', 'ingredients', 'tokens'),).filter(search=token[0])
             for word in token:
                 results = results | Meal.objects.annotate(search=SearchVector('meal_name', 'ingredients', 'tokens'),).filter(search=word)
