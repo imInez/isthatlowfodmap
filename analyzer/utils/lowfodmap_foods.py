@@ -152,6 +152,7 @@ ser kozi, red""",
                 Herbat biał
                 Herbat miętow
                 Sok pomidorow
+                koncenrtat pomidor
                 Sok warzywn, bez warzyw zabronionych
                 Sok żurawinow
                 Gin, yellow
@@ -391,7 +392,7 @@ ser kozi, red""",
                 pobrzeż
                 Tof, twarde
                 mięs mielo
-                mieloneg mięs
+                mielon mięs
                 mielo mięs
                 Wołowi
                 st
