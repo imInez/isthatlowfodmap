@@ -58,7 +58,7 @@ jQuery('#images .chosen').click(function(e){
 <!--find selected image -->
 selected_image = jQuery(this).attr('src');
 if (selected_image.substring(0,1) == '//') {
-    selected_image = 'http:'+selected_image
+    selected_image = 'http:'+selected_image;
 }
 <!--assign url of selected image to form field -->
 $('#image_url input').val(selected_image);
