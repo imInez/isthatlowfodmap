@@ -87,6 +87,7 @@ class IngredientsChecker():
         analyzed_stems = dict()
         for ngrams in stems_list:
             for stem in ngrams:
+                print('STEM: ', stem)
                 if stem in lfm:
                     new_key = self.translate(stem)
                     analyzed_stems[new_key] = lfm[stem]
@@ -106,7 +107,9 @@ class IngredientsChecker():
         for ingr in real_ingredients:
             ingr_found = False
             for key in analyzed_ngrams:
+                print('KEY: ', key)
                 if ingr_found is False:
+                    print('INGR: ', ingr)
                     if key in ingr:
                         ingr_found = True
                         results.append((ingr.strip(), analyzed_ngrams[key]['amount'],
@@ -138,7 +141,10 @@ class IngredientsChecker():
         ngrams.append(self.get_ngrams(stems, 3))
         ngrams.append(self.get_ngrams(stems, 2))
         ngrams.append(stems)
+        print('NGRAMS: ', ngrams)
         analyzed_ngrams = self.analyze(ngrams, self.lfm)
+        print('ANALYEDNGRAMS: ', analyzed_ngrams)
+        print('LFM: ', self.lfm)
         results, not_found = self.get_results(analyzed_ngrams, self.ingredients)
         ingredients_table = list(dict.fromkeys([i.strip().lower() for i in self.ingredients.splitlines() ]))
         return results, not_found, ingredients_table, stems
