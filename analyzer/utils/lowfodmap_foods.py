@@ -390,6 +390,7 @@ ser kozi, red""",
                 trąbik
                 pobrzeż
                 Tof, twarde
+                mięs mielo
                 Wołowi
                 st
                 Wieprzowi
