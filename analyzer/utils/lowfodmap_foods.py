@@ -391,6 +391,8 @@ ser kozi, red""",
                 pobrzeż
                 Tof, twarde
                 mięs mielo
+                mieloneg mięs
+                mielo mięs
                 Wołowi
                 st
                 Wieprzowi
