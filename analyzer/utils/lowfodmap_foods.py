@@ -391,14 +391,18 @@ ser kozi, red""",
                 trąbik
                 pobrzeż
                 Tof, twarde
-                mięs mielo
-                mielon mięs
-                mielo mięs
                 Wołowi
                 st
                 Wieprzowi
                 szyn, sprawdź składniki, orange
-                Tempeh (< 220 g), yellow""",
+                Tempeh (< 220 g), yellow
+                mięs mielo
+                mielon mięs
+                mięs mielon
+                mielo mięs
+                mięso
+                mieso
+                mamalyga""",
                 """PRZETWORY
                 Buracz marynowa
                 Kapar
