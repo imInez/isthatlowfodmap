@@ -30,12 +30,12 @@
         {% endif %}
 
         {% else %}
-        <a href="{% url 'users:login' %}?next=/meals/details/{{meal.pk}}/"><p class="d-inline mb-3"> Log in to save this meal </p></a>
+        <a href="{% url 'users:login' %}?next=/meals/details/{{meal.pk}}/"><p class="btn btn-dark d-inline mb-3"> save this meal </p></a>
         {% endif %}
         {% endwith %}
 
         {% if meal.meal_url %}
-        <a href="{{meal.meal_url}}" class="d-block pt-2"> Check the recipe </a>
+        <a href="{{meal.meal_url}}" class="d-block pb-2"> Check the recipe </a>
         {% endif %}
 
 
