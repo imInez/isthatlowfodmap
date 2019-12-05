@@ -54,11 +54,11 @@ def user_login(request):
             form = LoginForm()
     return render(request, 'registration/login.html', {'form': form})
 
-@login_required
-def user_meals(request):
-    meals = Meal.objects.filter(author=request.user)
-    #TODO add update forms
-    return render(request, 'users/profile.html', {'meals': meals})
+# @login_required
+# def user_meals(request):
+#     meals = Meal.objects.filter(author=request.user)
+#     #TODO add update forms
+#     return render(request, 'users/profile.html', {'meals': meals})
 
 @login_required
 def profile(request):

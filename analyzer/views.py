@@ -1,6 +1,8 @@
 from urllib import parse
 
 from django.contrib.postgres.search import SearchVector
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 from cards.models import Meal
@@ -37,7 +39,18 @@ def get_results(ingredients, language):
 
 
 def analyze(request, ingredients_correction=None, meal_url_correction=None, language=None):
-    meals = Meal.objects.all().order_by('-created')[0:3]
+    meals = Meal.objects.all().order_by('-created')
+    paginator = Paginator(meals, 3)
+    page = request.GET.get('page')
+    try:
+        meals = paginator.page(page)
+    except PageNotAnInteger:
+        meals = paginator.page(1)
+    except EmptyPage:
+        if request.is_ajax():
+            return HttpResponse('')
+        meals = paginator.page(paginator.num_pages)
+    # meals = Meal.objects.all().order_by('-created')[0:3]
     search_form = SearchForm()
     meal_data = dict()
     results_data = dict()
@@ -68,6 +81,8 @@ def analyze(request, ingredients_correction=None, meal_url_correction=None, lang
             if meal_url_correction and meal_url_correction != "None":
                 link_form.fields['link'].initial = parse.unquote(meal_url_correction)
             language_form.fields['language'].initial = language
+    if request.is_ajax():
+            return render(request, 'meals_list_ajax.html', {'meals': meals})
     return render(request, 'analyzer/analyze.html',
                   {'language_form': language_form, 'ingr_form': ingr_form, 'link_form': link_form, 'language': language,
                    #this is for results table

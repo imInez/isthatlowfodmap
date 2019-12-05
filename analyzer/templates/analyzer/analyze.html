@@ -94,48 +94,22 @@
 {% endblock content %}
 
 {% block domready %}
-current_start = 3
-current_end = 6
+var page = 1;
+var empty_page = false;
+var block_request = false;
 $(window).scroll(function() {
-    if($(window).scrollTop() == $(document).height() - $(window).height()) {
-        $.ajax({
-            url: 'meals/meals_list/',
-            type: 'get',
-            data: {
-                'start': current_start,
-                'end' : current_end
-                },
-            success: function(data) {
-                meals_list = eval(data)
-                $.each(meals_list, function(idx, data){
-                    safety = eval(data.fields.safety)
-                    console.log('SAFETY: ', safety)
-                    safety_str = ""
-                    $.each(safety, function(index, value){
-                            $.each(value, function(colour, rate){
-                                if (rate > 0) {
-                                    for (i=0; i<=rate; i++){
-                                        safety_str += "<span class='bg-"+colour+" d-inline' >&nbsp;&nbsp;&nbsp;</span>"
-                                    }
-                                }
-                            });
-                    });
-                    url = window.location.origin + '/meals/details/' + data.pk
-                    console.log(url)
-                    img_src = '/media/'+data.fields.image_file
-                    $('#meals-row').append("<div class='col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 pb-3 pt-3 text-center hover-dark'><a href='"+url+"'><img src='"+img_src+"' class='img-thumb pb-3' alt='"+data.fields.meal_name+"'></a>"+safety_str+"<a class='text-dark' href='"+url+"'><p>"+data.fields.meal_name+"</p></a></div>");
-                });
-
-            current_start = current_end
-            current_end += 3
-
-                }
-            });
-<!--        $(window).scrollTop($(window).scrollTop()-1);-->
-
+    var margin = $(document).height() - $(window).height() - 200;
+    if ($(window).scrollTop() > margin && empty_page == false && block_request == false) {
+        block_request = true;
+        page += 1;
+        $.get('?page=' + page, function(data) {
+            if(data == '') {
+                empty_page = true;
+            } else {
+                block_request = false;
+                $('#meals-row').append(data);
+            }
+        });
     }
 });
-
-
-
-{% endblock domready %}
+{% endblock %}

@@ -138,7 +138,7 @@ ser kozi, red""",
                 Truskaw
                 Winogro
                 Winogron
-                Bana, < 125g niedojrzałe | < 33g dojrzałe 33 g| suszone (<20 chips), orange
+                Banan, < 125g niedojrzałe | < 33g dojrzałe 33 g| suszone (<20 chips), orange
                 Borów (< 60 g), yellow
                 Jagod (< 60 g), yellow
                 Jagód (< 60 g), yellow
