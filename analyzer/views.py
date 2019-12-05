@@ -40,7 +40,7 @@ def get_results(ingredients, language):
 
 def analyze(request, ingredients_correction=None, meal_url_correction=None, language=None):
     meals = Meal.objects.all().order_by('-created')
-    paginator = Paginator(meals, 3)
+    paginator = Paginator(meals, 6)
     page = request.GET.get('page')
     try:
         meals = paginator.page(page)

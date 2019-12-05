@@ -54,18 +54,13 @@ def user_login(request):
             form = LoginForm()
     return render(request, 'registration/login.html', {'form': form})
 
-# @login_required
-# def user_meals(request):
-#     meals = Meal.objects.filter(author=request.user)
-#     #TODO add update forms
-#     return render(request, 'users/profile.html', {'meals': meals})
 
 @login_required
 def profile(request):
     meals = Meal.objects.filter(collectors=request.user)
     saved = Meal.objects.filter(author=request.user).count()
     collected = Meal.objects.filter(collectors=request.user).count()-saved
-    paginator = Paginator(meals, 3)
+    paginator = Paginator(meals, 6)
     page = request.GET.get('page')
     try:
         meals = paginator.page(page)
