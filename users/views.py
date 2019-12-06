@@ -92,3 +92,7 @@ def profile_edit(request):
 class PasswordChange(PasswordChangeView):
     success_url = '/users/profile'
     template_name = 'users/password_change.html'
+
+
+def credits(request):
+    return render(request, 'credits.html')

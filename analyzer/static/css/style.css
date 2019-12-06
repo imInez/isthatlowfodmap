@@ -29,8 +29,11 @@ background-size: cover;
 font-family: Spectral !important;
 }
 
+.font-small {
+font-size: 12px;
+}
 
-/* positioning / display */
+/* positioning & display */
 
 .fr {
 float: right;
@@ -135,6 +138,11 @@ font-color: #4E5E73 !important;
 white-space:pre;
 }
 
+.btn-round{
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
 
 
 /*LOGIN/REGISTER DROPDOWN */
@@ -191,7 +199,6 @@ margin-right: 150px;
         background-color: inherit;
         border-top:0 none;
     }
-
 
 }
 

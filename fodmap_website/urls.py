@@ -18,16 +18,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from users.views import credits
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('analyzer.urls', namespace="analyzer")),
+    path('credits/', credits, name='credits'),
     path('users/', include('users.urls', namespace="users")),
     path('meals/', include('cards.urls', namespace="cards")),
-    path('search/', include('search.urls', namespace="search"))
-
+    path('search/', include('search.urls', namespace="search")),
 ]
-
 
 
 if settings.DEBUG:
