@@ -10,32 +10,32 @@
 </div>
 
 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 order-1 order-sm-1 order-md-2 minh-60 bg-greybeige">
-    <div class="right-box align-items-start p-5 ">
+    <div class="right-box align-items-start nice-spacer pt-5">
         <h2 class="d-inline">{{ meal.meal_name|capfirst }} </h2>
+
         {% with collectors=meal.collectors.all  %}
-        {% if request.user.is_authenticated %}
-        {% if is_author %}
-        <a href="{% url 'cards:meal_edit' meal.pk %}" > Edit </a>
-        {% else %}
+            {% if request.user.is_authenticated %}
+                {% if is_author %}
+        <a href="{% url 'cards:meal_edit' meal.pk %}" ><p class="btn btn-dark mb-3">  edit</p> </a>
+                {% else %}
 
-        <a href="#" data-id="{{ meal.pk }}" data-action="{% if request.user in collectors %}remove{% else %}add{% endif %}" class="collect btn btn-dark mb-3">
-            {% if request.user in collectors %}
-            Remove from my collection
+                    <a href="#" data-id="{{ meal.pk }}" data-action="{% if request.user in collectors %}remove{% else %}add{% endif %}" class="collect btn btn-dark mb-3">
+                    {% if request.user in collectors %}
+                        Remove from my collection
+                        {% else %}
+                        Add to my collection
+                    {% endif %}
+                    </a>
+                    <p> This meal is in <span class="collectors_count"> {{ collectors.count }} </span> collection{{ collectors.count|pluralize }} </p>
+
+                {% endif %}
+
             {% else %}
-            Add to my collection
+                <a href="{% url 'users:login' %}?next=/meals/details/{{meal.pk}}/"><p class="btn btn-dark mb-3"> save </p></a>
             {% endif %}
-        </a>
-        <p> This meal is in <span class="collectors_count"> {{ collectors.count }} </span> collection{{ collectors.count|pluralize }} </p>
-
-        {% endif %}
-
-        {% else %}
-        <a href="{% url 'users:login' %}?next=/meals/details/{{meal.pk}}/"><p class="btn btn-dark d-inline mb-3"> save this meal </p></a>
-        {% endif %}
         {% endwith %}
-
         {% if meal.meal_url %}
-        <a href="{{meal.meal_url}}" class="d-block pb-2"> Check the recipe </a>
+        <a href="{{meal.meal_url}}" class="d-block pb-2 pt-2"> Check the recipe </a>
         {% endif %}
 
 
