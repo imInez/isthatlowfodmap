@@ -25,7 +25,7 @@
     </tr>
     <tr class="sm-screen">
         <td class="bg-{{safety}} text-center">{{ ingr }}
-            {% if amount %}<br> amount: {{ amount }}{% endif %}
+            {% if amount %}<br> max amount: {{ amount }}{% endif %}
             {% if safety == 'blue' %} <br> change to {% else %} {{ comment }} {% endif %}{% if substitute is not None %} {{ substitute }} {% endif %}
         </td>
     </tr>
