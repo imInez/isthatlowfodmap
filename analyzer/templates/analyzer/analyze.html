@@ -7,10 +7,10 @@
 {% block row %}
 
 {% if results %}
-<!--<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 order-2 order-sm-2 order-md-1 p-5">-->
-<!--    <div class="h-100">-->
-<!--    </div>-->
-<!--</div>-->
+<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 order-2 order-sm-2 order-md-1 p-5">
+    <div class="h-100">
+    </div>
+</div>
 
 <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 nice-spacer order-1 order-sm-1 order-md-2 minh-60 bg-greybeige">
     <div class="align-items-start">
@@ -19,7 +19,7 @@
         {% include "analyzer/results_table.html"  with safety=safety_table %}
         <p class="pt-3">Should the results be unsatisfying, try to <a href="{% url 'analyzer:analyze' ingredients_save meal_url language %}">
             correct the ingredients or change language</a> and check them again.</p>
-        <div class="pt-3">
+        <div class="pt-3 text-center">
             <form class="d-inline" name="save_meal" method="post"
                   action="{% url 'cards:meal_create'%}">
                 {% csrf_token %}
@@ -41,8 +41,8 @@
 
 {% else %}
 
-<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 order-2 order-sm-2 order-md-1 minh-60 md-screen">
-    <img src="{% static 'images/pineapple7.jpg' %}" class="maxw-none fr ">
+<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 order-2 order-sm-2 order-md-1 minh-60" >
+    <img src="{% static 'images/pineapple7.jpg' %}" class="maxw-none fr md-screen">
 </div>
 
 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 nice-spacer order-1 order-sm-1 order-md-2 minh-60 bg-greybeige ">

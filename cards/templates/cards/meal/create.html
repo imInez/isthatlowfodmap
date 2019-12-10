@@ -5,8 +5,7 @@
 
 {% block row %}
 
-<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5  minh-60 p-2 ">
-
+<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5  minh-60 p-2  order-sm-2 order-md-1 ">
     {% if meal_images is not None %}
     <p> Choose an image for your meal </p>
     <div id="images">
@@ -17,11 +16,10 @@
     {% endif %}
 </div>
 
-<div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 nice-spacer minh-60 bg-greybeige">
+<div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 nice-spacer minh-60 bg-greybeige order-sm-1 order-md-2 ">
 
     <h1>Save a meal</h1>
     <form action="{% url 'cards:meal_create' %}" method="post" name="create_meal" enctype="multipart/form-data">
-        <!--    <form action="." method="post" name="create_meal" enctype="multipart/form-data">-->
         {% csrf_token %}
 
         {{ form.non_field_errors }}
