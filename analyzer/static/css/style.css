@@ -210,10 +210,21 @@ margin-right: 150px;
     .md-screen {
         display:none;
     }
+
+    .nice-spacer{
+        padding: 0.3rem !important;
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
     .sm-screen{
         display:none;
     }
+
+    .nice-spacer{
+        padding: 3rem !important;
+    }
+
 }
