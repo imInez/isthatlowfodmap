@@ -12,8 +12,7 @@
 <!--    </div>-->
 <!--</div>-->
 
-
-<div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 p-5 order-1 order-sm-1 order-md-2 minh-60 bg-greybeige md-screen">
+<div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 p-5 order-1 order-sm-1 order-md-2 minh-60 bg-greybeige">
     <div class="align-items-start">
         <br><br>
         <h3> Your results </h3>
@@ -42,11 +41,11 @@
 
 {% else %}
 
-<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 order-2 order-sm-2 order-md-1 minh-60 md-screen">
+<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 order-2 order-sm-2 order-md-1 minh-60 ">
     <img src="{% static 'images/pineapple7.jpg' %}" class="maxw-none fr ">
 </div>
 
-<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 p-5 order-1 order-sm-1 order-md-2 minh-60 bg-greybeige md-screen">
+<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 p-5 order-1 order-sm-1 order-md-2 minh-60 bg-greybeige no-">
     <h5 class="text-center"> Check whether your meal is low fodmap safe </h5>
     <form action='#' method="post">
         {{ ingr_form|crispy }}
@@ -58,17 +57,6 @@
 </div>
 
 {% endif %}
-
-<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 p-5 order-1 order-sm-1 order-md-2 minh-60 sm-screen">
-    <h5 class="text-center"> Check whether your meal is low fodmap safe </h5>
-    <form action='#' method="post">
-        {{ ingr_form|crispy }}
-        {{ link_form|crispy }}
-        <div id="language">{{ language_form|crispy }}</div>
-        {% csrf_token %}
-        <input type="submit" value="Check it!" class="btn btn-dark">
-    </form>
-</div>
 
 {% endblock row %}
 
