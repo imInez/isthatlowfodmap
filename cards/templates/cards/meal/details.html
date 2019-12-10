@@ -21,9 +21,9 @@
 
                     <a href="#" data-id="{{ meal.pk }}" data-action="{% if request.user in collectors %}remove{% else %}add{% endif %}" class="collect btn btn-dark mb-3">
                     {% if request.user in collectors %}
-                        Remove from my collection
+                        remove from my collection
                         {% else %}
-                        Add to my collection
+                        add to my collection
                     {% endif %}
                     </a>
                     <p> This meal is in <span class="collectors_count"> {{ collectors.count }} </span> collection{{ collectors.count|pluralize }} </p>
