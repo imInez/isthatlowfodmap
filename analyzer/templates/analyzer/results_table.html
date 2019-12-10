@@ -3,7 +3,7 @@
 <h5 class="mt-3">Meal safety: {% include 'cards/meal/meal_safety.html' %} </h5>
 
 <table class="table table-striped">
-    <thead>
+    <thead class="md-screen">
     <tr>
         <th scope="col"></th>
         <th scope="col">Ingredient</th>
@@ -13,16 +13,21 @@
     </tr>
     </thead>
     <tbody>
-
     {% for ingr in ingredients %}
     {% for res, amount, comment, safety, substitute in results %}
     {% if ingr == res %}
-    <tr>
+    <tr class="md-screen">
         <th scope="row" class="bg-{{safety}}"></th>
         <td>{{ ingr }} </td>
         <td>{{ amount }} </td>
         <td>{% if safety == 'blue' %} change to {% else %} {{ comment }} {% endif %} </td>
         <td>{% if substitute is not None %} {{ substitute }} {% endif %}  </td>
+    </tr>
+    <tr class="sm-screen">
+        <td class="bg-{{safety}} text-center">{{ ingr }}
+            {% if amount %}<br> amount: {{ amount }}{% endif %}
+            {% if safety == 'blue' %} <br> change to {% else %} {{ comment }} {% endif %}{% if substitute is not None %} {{ substitute }} {% endif %}
+        </td>
     </tr>
     {% endif %}
     {% endfor %}
@@ -30,6 +35,9 @@
     </tbody>
 </table>
 
+
+
+<div class="sm-screen">&nbsp;</div>
 <div class="row whitespace no-gutters">
     <div class="col bg-green text-center pl-1 pr-1">safe</div>
     <div class="col bg-yellow text-center pl-2 pr-2">be careful with the amount</div>
