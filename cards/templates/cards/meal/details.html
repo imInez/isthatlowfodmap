@@ -8,7 +8,7 @@
     <img src='{% if meal.image_url %}{{ meal.image_url }}{% else %}{{ meal.image_file.url }}{% endif %}'
          class="fr oh mxh-800 md-screen">
     <img src='{% if meal.image_url %}{{ meal.image_url }}{% else %}{{ meal.image_file.url }}{% endif %}'
-         class="fr oh mxh-800 sm-screen">
+         class="w-100 sm-screen pt-0 mt-0">
 </div>
 
 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 order-1 order-sm-1 order-md-2 minh-60 bg-greybeige">
@@ -20,9 +20,8 @@
                 {% if is_author %}
         <a href="{% url 'cards:meal_edit' meal.pk %}" ><p class="btn btn-dark mb-3">  edit</p> </a>
                 {% else %}
-
+                    <div class="sm-screen">&nbsp;</div>
                     <a href="#" data-id="{{ meal.pk }}" data-action="{% if request.user in collectors %}remove{% else %}add{% endif %}" class="collect btn btn-dark mb-3">
-                        <div class="sm-screen">&nbsp;</div>
                         {% if request.user in collectors %}
                         remove from my collection
                         {% else %}
