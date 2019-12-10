@@ -6,7 +6,9 @@
 
 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 order-2 order-sm-2 order-md-1 minh-60 center_content ">
     <img src='{% if meal.image_url %}{{ meal.image_url }}{% else %}{{ meal.image_file.url }}{% endif %}'
-         class="fr oh mxh-800">
+         class="fr oh mxh-800 md-screen">
+    <img src='{% if meal.image_url %}{{ meal.image_url }}{% else %}{{ meal.image_file.url }}{% endif %}'
+         class="fr oh mxh-800 sm-screen">
 </div>
 
 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 order-1 order-sm-1 order-md-2 minh-60 bg-greybeige">
@@ -20,7 +22,8 @@
                 {% else %}
 
                     <a href="#" data-id="{{ meal.pk }}" data-action="{% if request.user in collectors %}remove{% else %}add{% endif %}" class="collect btn btn-dark mb-3">
-                    {% if request.user in collectors %}
+                        <div class="sm-screen">&nbsp;</div>
+                        {% if request.user in collectors %}
                         remove from my collection
                         {% else %}
                         add to my collection
