@@ -1,6 +1,8 @@
 # Is that low fodmap?
 
-[!lfm].(lfm.png)
+
+See it live: https://isthatlowfodmap.herokuapp.com (since it's on free heroku, give it a second to load)
+![lfm].(lfm.png)
 
 ## Table of contents
 * [General info](#general-info)
@@ -17,6 +19,7 @@ I'm still working on tihs project, with many enhancements planned.
 	
 ## Technologies
 Python3
+BeautifulSoup
 Django2
 HTML, CSS, Boostrap
-BeautifulSoup
+
