@@ -3,7 +3,7 @@
 
 See it live: https://isthatlowfodmap.herokuapp.com<br>
  (since it's on free heroku, give it a second to load)<br>
-![lfm].(./lfm.png)
+![fodmap](lfm.png)
 
 
 ## Table of contents
