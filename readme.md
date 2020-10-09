@@ -17,7 +17,7 @@ Users can add their own products, or links to recipies they like to check the sa
 They can make their collections and save recipies added by others.
 They are then presented with a table of recognized products and their safety in low FODMAP diet.
 For now it works for English and Polish ingredients.
-I'm still working on tihs project, with many enhancements planned.
+
 
 	
 ## Technologies
